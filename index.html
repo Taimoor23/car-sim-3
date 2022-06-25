@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+      <script src="//unpkg.com/aframe-physics-extras@0.1.2/dist/aframe-physics-extras.min.js"></script>
+      <script src="//unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+      <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js"></script>
+      <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+      <script src="./play.js"></script>
+    </head>
+    <body>
+      <a-scene>
+        <a-assets>
+          <a-assets-item id="model" src="./assets/tryout//dodge_challenger_srt_demon_sdc/scene.gltf"></a-assets-item>
+          <a-assets-item id="track" src="./assets/track/scene.gltf"></a-assets-item>
+          <a-assets-item id="line" src="./assets/starting_line/scene.gltf"></a-assets-item>
+        </a-assets>
+        <a-entity id="environment" environment="preset:default;skyType:atmosphere;lighting:spot"></a-entity>  
+        <a-entity light="type:ambient;color:yellow;intensity:0.5"></a-entity>
+
+        <a-entity id="camera-rig" movement-controls="speed: 0.2; constrainToNavMesh: true" position="0 1 2">
+          <!--Camera and Cursor-->
+          <a-entity id="camera" camera position="5 4 7" look-controls="pointerLockEnabled: false">
+            <a-entity 
+              id="car" 
+              gltf-model="#model" 
+              position="0 -4.4 0" 
+              rotation="0 180 0"
+              scale="1 1 1"
+              body="type: static; mass: 5; shape: none;" 
+              shape="shape: sphere; radius: 5; offset: 0 3 0;">
+            </a-entity>     
+            <a-cursor></a-cursor>
+          <!--Text-->
+            <a-entity id="ins1" position="-4.62 4.25669 -7.1"
+              text="font: mozillavr; width:5; height: 5; value: Press 'Arrow Keys' to Move the Player">
+            </a-entity>
+    
+            <a-entity id="playerLife" position="-2 5 -7.16344"
+              text="font: mozillavr; width:10; height: 5;value: Player Life:">
+              <a-entity id="countLife" position="3 0 0" text="font: mozillavr; width:10; height: 5; value: 5"></a-entity>
+            </a-entity>
+    
+            <a-entity id="over" position="1 1 -3"
+              text="font: mozillavr; width:5; height: 5; value: Better Luck Next Time :(" visible="false">
+            </a-entity>
+    
+            <a-entity id="completed" position="1.5 1 -3"
+              text="font: mozillavr; width:5; height: 5; value: Level Completed :)" visible="false">
+            </a-entity>
+          </a-entity>
+        </a-entity>
+        <a-entity id="race" gltf-model="#track" position="0 1 3"  scale="1 1 1"></a-entity>
+        <a-entity id="start" gltf-model="#line" position="5 4 3"  scale="0.035 0.035 0.035"></a-entity>
+      </a-scene>  
+    </body>
+</html>
